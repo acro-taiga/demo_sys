@@ -32,6 +32,10 @@ class JaStrings implements FlutterPwValidatorStrings {
   @override
   // TODO: implement normalLetters
   String get normalLetters => "";
+  
+  @override
+  // TODO: implement lowercaseLetters
+  String get lowercaseLetters => throw UnimplementedError();
 }
 
 Map<int, Color> color = {

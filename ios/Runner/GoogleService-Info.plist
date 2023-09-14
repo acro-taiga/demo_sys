@@ -15,9 +15,9 @@
 	<key>BUNDLE_ID</key>
 	<string>com.example.deliveryControlWeb</string>
 	<key>PROJECT_ID</key>
-	<string>deliverycontrol-c25a7</string>
+	<string>fir-sys-47c75</string>
 	<key>STORAGE_BUCKET</key>
-	<string>deliverycontrol-c25a7.appspot.com</string>
+	<string>fir-sys-47c75.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>

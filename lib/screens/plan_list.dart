@@ -439,7 +439,7 @@ class _PlanList extends ConsumerState<PlanListScreen> {
                     [箱数] ${plan.boxNum ?? 0}箱
                     [問合せ番号] ${plan.infoNum}
                     
-                    https://deliverycontrol-c25a7.web.app/
+                    https://fir-sys-47c75.web.app/
                           
                     ご不明点などございましたら、LINEグループにてお気軽にご連絡ください。
                     よろしくお願いします。

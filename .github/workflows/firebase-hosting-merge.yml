@@ -26,4 +26,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DELIVERYCONTROL_C25A7 }}'
           channelId: live
-          projectId: deliverycontrol-c25a7
+          projectId: fir-sys-47c75
