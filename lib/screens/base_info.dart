@@ -44,7 +44,7 @@ class _BaseInfo extends ConsumerState {
 
   Future<void> submit(Base base) async {
     if (!_key.currentState!.validate()) return;
-    await baseDatabase.addNewBase(base);
+    // await baseDatabase.addNewBase(base);
     if (!mounted) return;
     Navigator.pop(context);
   }

@@ -127,53 +127,53 @@ class _LuggageImport extends ConsumerState<LuggageImport> {
                 for (var data in utfGetData) {
                   int getSetNum = int.tryParse(data[5]) ?? 0;
                   int getShippingNum = int.tryParse(data[6]) ?? 0;
-                  itemDatabase.addNewItem(AmazonItem(
-                    shippeddate: null,
-                    itemId: "",
-                    uid: ref.read(loginUserProvider).uid,
-                    userName: ref.read(loginUserProvider).adimnFig
-                        ? selectedUser!
-                        : ref.read(loginUserProvider).name,
-                    amazonItemName: data[3],
-                    asin: data[2],
-                    itemList: [
-                      Item(
-                          itemName: data[3],
-                          janCode: int.tryParse(data[4]) ?? 0,
-                          setNum: 1,
-                          shippingNum: 1,
-                          actualShippingNum: 0,
-                          sumNum: 0,
-                          arriveNum: 1,
-                          place: "",
-                          expiryDate: null),
-                    ],
-                    arriveDate: DateTime.now().weekday == 1
-                        ? DateTime.now()
-                            .add(Duration(days: 6 - DateTime.now().weekday))
-                        : DateTime.now().add(
-                            Duration(days: 6 - DateTime.now().weekday + 7)),
-                    createdAt: DateTime.now(),
-                    shippingNum: getShippingNum,
-                    actualShippingNum: 0,
-                    base: selectBase!,
-                    status: "未入力",
-                    sku: data[0],
-                    fnskuCode: data[1],
-                    arriveNum: getSetNum * getShippingNum,
-                    sumNum: 0,
-                    notes: [],
-                    setNum: getSetNum,
-                    expiryDate: null,
-                    isSelected: false,
-                    arrivedDate: null,
-                    stickerNum: 0,
-                    destructionNum: 0,
-                    returnNum: 0,
-                    largeFlg: false,
-                    editJanFlg: false,
-                    addAdminFlg: ref.read(loginUserProvider).adimnFig,
-                  ));
+                  // itemDatabase.addNewItem(AmazonItem(
+                  //   shippeddate: null,
+                  //   itemId: "",
+                  //   uid: ref.read(loginUserProvider).uid,
+                  //   userName: ref.read(loginUserProvider).adimnFig
+                  //       ? selectedUser!
+                  //       : ref.read(loginUserProvider).name,
+                  //   amazonItemName: data[3],
+                  //   asin: data[2],
+                  //   itemList: [
+                  //     Item(
+                  //         itemName: data[3],
+                  //         janCode: int.tryParse(data[4]) ?? 0,
+                  //         setNum: 1,
+                  //         shippingNum: 1,
+                  //         actualShippingNum: 0,
+                  //         sumNum: 0,
+                  //         arriveNum: 1,
+                  //         place: "",
+                  //         expiryDate: null),
+                  //   ],
+                  //   arriveDate: DateTime.now().weekday == 1
+                  //       ? DateTime.now()
+                  //           .add(Duration(days: 6 - DateTime.now().weekday))
+                  //       : DateTime.now().add(
+                  //           Duration(days: 6 - DateTime.now().weekday + 7)),
+                  //   createdAt: DateTime.now(),
+                  //   shippingNum: getShippingNum,
+                  //   actualShippingNum: 0,
+                  //   base: selectBase!,
+                  //   status: "未入力",
+                  //   sku: data[0],
+                  //   fnskuCode: data[1],
+                  //   arriveNum: getSetNum * getShippingNum,
+                  //   sumNum: 0,
+                  //   notes: [],
+                  //   setNum: getSetNum,
+                  //   expiryDate: null,
+                  //   isSelected: false,
+                  //   arrivedDate: null,
+                  //   stickerNum: 0,
+                  //   destructionNum: 0,
+                  //   returnNum: 0,
+                  //   largeFlg: false,
+                  //   editJanFlg: false,
+                  //   addAdminFlg: ref.read(loginUserProvider).adimnFig,
+                  // ));
                 }
 
                 if (!mounted) {

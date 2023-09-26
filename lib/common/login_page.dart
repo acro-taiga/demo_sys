@@ -24,8 +24,8 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class LoginPageState extends ConsumerState<LoginPage> {
   final _auth = FirebaseAuth.instance;
-  String email = '';
-  String password = '';
+  final String email = 'demoadmin@gmail.com';
+  final String password = 'demoadmin';
   bool hidePassword = true;
   late LoginUserModel loginUser;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -256,9 +256,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
                             labelText: 'LOGIN ID',
                           ),
                           onChanged: (String value) {
-                            setState(() {
-                              email = value;
-                            });
+                            setState(() {});
                           },
                         ),
                       ),
@@ -300,9 +298,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
                             ),
                           ),
                           onChanged: (String value) {
-                            setState(() {
-                              password = value;
-                            });
+                            setState(() {});
                           },
                         ),
                       ),

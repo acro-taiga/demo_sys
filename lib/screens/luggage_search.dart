@@ -1080,28 +1080,28 @@ class _SearchLuggages extends ConsumerState<SearchLuggages> {
                                                       (index) =>
                                                           selectItem[index]
                                                               .itemId);
-                                              planDatabase.addNewPlan(
-                                                Plan(
-                                                  boxHeight: null,
-                                                  boxHorizontal: null,
-                                                  boxNum: null,
-                                                  boxWeight: null,
-                                                  boxWidth: null,
-                                                  itemIds: itemIds,
-                                                  name: '',
-                                                  mailStatus: '未送信',
-                                                  planId: '',
-                                                  selected: false,
-                                                  shippingDate: null,
-                                                  status: '未依頼',
-                                                  uid: ref
-                                                      .watch(loginUserProvider)
-                                                      .uid,
-                                                  note: "",
-                                                  infoNum: null,
-                                                  shippingWay: null,
-                                                ),
-                                              );
+                                            //   planDatabase.addNewPlan(
+                                            //     Plan(
+                                            //       boxHeight: null,
+                                            //       boxHorizontal: null,
+                                            //       boxNum: null,
+                                            //       boxWeight: null,
+                                            //       boxWidth: null,
+                                            //       itemIds: itemIds,
+                                            //       name: '',
+                                            //       mailStatus: '未送信',
+                                            //       planId: '',
+                                            //       selected: false,
+                                            //       shippingDate: null,
+                                            //       status: '未依頼',
+                                            //       uid: ref
+                                            //           .watch(loginUserProvider)
+                                            //           .uid,
+                                            //       note: "",
+                                            //       infoNum: null,
+                                            //       shippingWay: null,
+                                            //     ),
+                                            //   );
                                             } catch (e) {
                                               print(e);
                                               PopupAlert.alert(
@@ -1402,7 +1402,7 @@ class _SearchLuggages extends ConsumerState<SearchLuggages> {
                             itemId: "",
                             uid: ref.watch(loginUserProvider).uid,
                             userName: ref.watch(loginUserProvider).adimnFig
-                                ? ref.watch(customerListProvider).first.name
+                                ? ""
                                 : ref.watch(loginUserProvider).name,
                             amazonItemName: "",
                             asin: "",
@@ -1422,7 +1422,7 @@ class _SearchLuggages extends ConsumerState<SearchLuggages> {
                             createdAt: DateTime.now(),
                             shippingNum: 1,
                             actualShippingNum: 0,
-                            base: ref.watch(loginUserProvider).base[0],
+                            base: "福岡",
                             status: "入荷待ち",
                             sku: "",
                             fnskuCode: "",
@@ -1438,7 +1438,7 @@ class _SearchLuggages extends ConsumerState<SearchLuggages> {
                             returnNum: 0,
                             largeFlg: false,
                             editJanFlg: false,
-                            addAdminFlg: ref.read(loginUserProvider).adimnFig,
+                            addAdminFlg: false,
                           ),
                           true),
                     );
@@ -2006,9 +2006,9 @@ class _ViewCommentsState extends ConsumerState<ViewComments> {
                                                     setState(() {
                                                       isLoading = true;
                                                     });
-                                                    await itemDatabase
-                                                        .addNewItem(
-                                                            widget.item);
+                                                    // await itemDatabase
+                                                    //     .addNewItem(
+                                                    //         widget.item);
                                                     setState(() {
                                                       isLoading = false;
                                                     });

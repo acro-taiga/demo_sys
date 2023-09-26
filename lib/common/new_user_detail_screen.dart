@@ -147,29 +147,29 @@ class NewUserDetailScreenState extends State<NewUserDetailScreen> {
 
   Future<void> submit() async {
     // if (!_key.currentState!.validate()) return;
-    await customerDatabase.addNewCustomer(Customer(
-      uid: widget.user.uid,
-      name: widget.userJoinController[0].text,
-      mail: widget.user.email.toString(),
-      base: [],
-      line_name: widget.userJoinController[2].text,
-      line_id: '',
-      shop_name: widget.userJoinController[3].text,
-      introducer: widget.userJoinController[4].text,
-      driver_name: widget.userJoinController[5].text,
-      category: widget.userJoinController[6].text,
-      shipping_num: int.tryParse(widget.userJoinController[7].text) == null
-          ? 0
-          : int.parse(widget.userJoinController[7].text),
-      monthly_charge: 0,
-      large_product: userJoinBool[0],
-      no_sticker: userJoinBool[1],
-      commitment: false,
-      deposit: false,
-      flg: false,
-      approval: false,
-      baseFlg: false,
-    ));
+    // await customerDatabase.addNewCustomer(Customer(
+    //   uid: widget.user.uid,
+    //   name: widget.userJoinController[0].text,
+    //   mail: widget.user.email.toString(),
+    //   base: [],
+    //   line_name: widget.userJoinController[2].text,
+    //   line_id: '',
+    //   shop_name: widget.userJoinController[3].text,
+    //   introducer: widget.userJoinController[4].text,
+    //   driver_name: widget.userJoinController[5].text,
+    //   category: widget.userJoinController[6].text,
+    //   shipping_num: int.tryParse(widget.userJoinController[7].text) == null
+    //       ? 0
+    //       : int.parse(widget.userJoinController[7].text),
+    //   monthly_charge: 0,
+    //   large_product: userJoinBool[0],
+    //   no_sticker: userJoinBool[1],
+    //   commitment: false,
+    //   deposit: false,
+    //   flg: false,
+    //   approval: false,
+    //   baseFlg: false,
+    // ));
     if (!mounted) return;
     // await FirebaseAuth.instance.signOut();
     // Navigator.of(context).popUntil((route) => route.isFirst);
