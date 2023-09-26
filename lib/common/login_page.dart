@@ -10,6 +10,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import './backgroundAnimation.dart';
 
+import 'package:lottie/lottie.dart';
+
 import '../exSize.dart';
 import './popup.dart';
 
@@ -211,57 +213,47 @@ class LoginPageState extends ConsumerState<LoginPage> {
     return Scaffold(
       // backgroundColor: const Color.fromARGB(159, 127, 237, 223),
       extendBodyBehindAppBar: true,
-      body:
-          // BackgroundAnimation(
-          //   size: MediaQuery.of(context).size,
-          // child:
-          Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: context.screenHeight * 0.03,
-              ),
-              Expanded(
-                child: Image.asset("assets/logo-T-color.jpg"),
-              ),
-              Container(
+      body: BackgroundAnimation(
+        size: MediaQuery.of(context).size,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  height: context.screenHeight * 0.03,
+                ),
+                SizedBox(
+                  height: context.screenHeight * 0.35,
+                  child: Lottie.network(
+                    "https://lottie.host/b03d82d9-749c-4f6d-b117-5e15824f3d5f/eKCBTidGBB.json",
+                  ),
+                ),
+                Container(
                   padding: const EdgeInsets.all(10),
-                  height: context.screenHeight * 0.5,
+                  // height: context.screenHeight * 0.5,
                   width: context.screenWidth * 0.8,
-                  // decoration: BoxDecoration(
-                  //   boxShadow: [
-                  //     BoxShadow(
-                  //       color: Colors.grey,
-                  //       spreadRadius: 5,
-                  //       blurRadius: 5,
-                  //       offset: Offset(1, 1),
-                  //     )
-                  //   ],
-                  //   color: Colors.white,
-                  // ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: context.screenWidth * 0.5,
-                        height: context.screenHeight * 0.05,
-                        child: const Text('ログインID',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ),
+                      // SizedBox(
+                      //   width: context.screenWidth * 0.5,
+                      //   height: context.screenHeight * 0.05,
+                      //   child: const Text('ログインID',
+                      //       style: TextStyle(
+                      //         fontSize: 20,
+                      //         fontWeight: FontWeight.bold,
+                      //       )),
+                      // ),
                       SizedBox(
                         width: context.screenWidth * 0.5,
                         height: context.screenHeight * 0.08,
                         child: TextFormField(
                           decoration: const InputDecoration(
                             icon: Icon(Icons.mail),
-                            // hintText: 'メールアドレスを入力',
-                            labelText: 'Email Address',
+                            hintText: 'メールアドレスを入力',
+                            labelText: 'LOGIN ID',
                           ),
                           onChanged: (String value) {
                             setState(() {
@@ -270,14 +262,17 @@ class LoginPageState extends ConsumerState<LoginPage> {
                           },
                         ),
                       ),
+                      // SizedBox(
+                      //   width: context.screenWidth * 0.5,
+                      //   height: context.screenHeight * 0.05,
+                      //   child: const Text('パスワード',
+                      //       style: TextStyle(
+                      //         fontSize: 20,
+                      //         fontWeight: FontWeight.bold,
+                      //       )),
+                      // ),
                       SizedBox(
-                        width: context.screenWidth * 0.5,
                         height: context.screenHeight * 0.05,
-                        child: const Text('パスワード',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            )),
                       ),
                       SizedBox(
                         width: context.screenWidth * 0.5,
@@ -289,7 +284,7 @@ class LoginPageState extends ConsumerState<LoginPage> {
                           obscureText: hidePassword,
                           decoration: InputDecoration(
                             icon: const Icon(Icons.lock),
-                            // hintText: 'パスワードを入力',
+                            hintText: 'パスワードを入力',
                             labelText: 'Password',
                             suffixIcon: IconButton(
                               icon: Icon(
@@ -311,7 +306,26 @@ class LoginPageState extends ConsumerState<LoginPage> {
                           },
                         ),
                       ),
-                      // SizedBox(height: context.screenHeight * 0.02),
+                      Container(
+                        width: context.screenWidth * 0.5,
+                        height: context.screenHeight * 0.05,
+                        // color: Colors.red,
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () async {
+                            // 忘れた方はこちらページ
+                            await resetting(context);
+                          },
+                          child: const Text('※パスワードを忘れた方はこちら',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                color: Color.fromARGB(255, 131, 131, 131),
+                              )),
+                        ),
+                      ),
+                      SizedBox(
+                        height: context.screenHeight * 0.05,
+                      ),
                       SizedBox(
                         width: context.screenWidth * 0.15,
                         height: context.screenHeight * 0.08,
@@ -324,86 +338,49 @@ class LoginPageState extends ConsumerState<LoginPage> {
                             },
                             child: const Text('ログイン')),
                       ),
-                      // メール送信参考サイト
-                      // https://pub.dev/packages/mailer
-                      // SizedBox(
-                      //   width: context.screenWidth * 0.15,
-                      //   height: context.screenHeight * 0.08,
-                      //   child: ElevatedButton(
-                      //       style: ElevatedButton.styleFrom(
-                      //           backgroundColor:
-                      //               Colors.blueAccent.withOpacity(0.8)),
-                      //       onPressed: () async {
-                      //         String username = 'deliveryaduser@gmail.com';
-                      //         String password = 'deliveryaduser2023';
-                      //         String toUser = email;
-                      //         try {
-                      //           await FirebaseFirestore.instance
-                      //               .collection('email')
-                      //               .add({
-                      //             'to': toUser,
-                      //             // _controller.text,
-                      //             'message': {
-                      //               'subject': 'Hello from Flutter!',
-                      //               'html': 'このメールは${toUser
-                      //                   // _controller.text
-                      //                   }宛てにSendGridDemoAppから送信されました。'
-                      //                   '<br>'
-                      //                   'html形式で文章を作成することが出来ます。'
-                      //                   '<br>'
-                      //                   '<img src="${Image.asset('assets/QRcord.png')}">'
-                      //                   '<img src="delivery_control_web/assets/QRcord.png">'
-                      //             }
-                      //           });
-                      //           // ドキュメント追加後にテキストフォームを空にする
-                      //           setState(() {
-                      //             // _controller.clear();
-                      //           });
-                      //         } on Exception catch (e) {
-                      //           debugPrint(e.toString());
-                      //         }
-                      //       },
-                      //       child: const Text('メール送信テスト')),
+                      // SizedBox(height: context.screenHeight * 0.02),
+                      // Container(
+                      //   height: context.screenHeight * 0.05,
+                      //   child: TextButton(
+                      //     onPressed: () async {
+                      //       // 忘れた方はこちらページ
+                      //       await resetting(context);
+                      //     },
+                      //     child: const Text('※忘れた方はこちら',
+                      //         style: TextStyle(
+                      //           decoration: TextDecoration.underline,
+                      //           color: Colors.black,
+                      //         )),
+                      //   ),
                       // ),
+                      SizedBox(height: context.screenHeight * 0.05),
+                      SizedBox(
+                        width: context.screenWidth * 0.15,
+                        height: context.screenHeight * 0.08,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Colors.redAccent.withOpacity(0.8)),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const NewUserScreen(),
+                              ));
+                            },
+                            child: const Text('新規利用者登録')),
+                      ),
+                      SizedBox(
+                        height: context.screenHeight * 0.01,
+                      ),
                     ],
-                  )),
-              SizedBox(
-                height: context.screenHeight * 0.05,
-                child: TextButton(
-                  onPressed: () async {
-                    // 忘れた方はこちらページ
-                    await resetting(context);
-                  },
-                  child: const Text('※忘れた方はこちら',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Colors.black,
-                      )),
+                  ),
                 ),
-              ),
-              SizedBox(height: context.screenHeight * 0.02),
-              SizedBox(
-                width: context.screenWidth * 0.15,
-                height: context.screenHeight * 0.08,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.redAccent.withOpacity(0.8)),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const NewUserScreen(),
-                      ));
-                    },
-                    child: const Text('新規利用者登録はこちら')),
-              ),
-              SizedBox(
-                height: context.screenHeight * 0.01,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
+        // );
       ),
     );
-    // );
   }
 }
 
