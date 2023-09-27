@@ -570,8 +570,8 @@ class _PlanList extends ConsumerState<PlanListScreen> {
                 infoNum: null,
                 shippingWay: null,
               );
-              String res = await planDatabase.addNewPlan(newPlan);
-              newPlan.planId = res;
+              // String res = await planDatabase.addNewPlan(newPlan);
+              // newPlan.planId = res;
               ref.read(planListProvider.notifier).addPlan(newPlan);
               stateManager.insertRows(rows.length, [
                 PlutoRow(cells: {

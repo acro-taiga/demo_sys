@@ -33,7 +33,7 @@ class _AdminInfo extends ConsumerState<AdminInfo> {
 
   Future<void> submit(Admin admin, String password) async {
     if (!_key.currentState!.validate()) return;
-    await adminDatabase.addNewAdmin(admin, password);
+    // await adminDatabase.addNewAdmin(admin, password);
     if (!mounted) return;
     Navigator.pop(context);
   }
@@ -62,200 +62,206 @@ class _AdminInfo extends ConsumerState<AdminInfo> {
                       builder: ((context) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Text(
-                                  '管理者登録',
-                                  style: TextStyle(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold,
+                          child: SizedBox(
+                            width: context.screenWidth * 0.3,
+                            height: context.screenHeight * 0.4,
+                            child: Center(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    '管理者登録',
+                                    style: TextStyle(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: context.screenHeight * 0.01,
-                                ),
-                                TextFormField(
-                                  decoration: const InputDecoration(
-                                    icon: Icon(Icons.abc),
-                                    hintText: '名前を入力',
-                                    labelText: 'name',
+                                  SizedBox(
+                                    height: context.screenHeight * 0.01,
                                   ),
-                                  validator: (value) {
-                                    if ((value == null)) {
-                                      return '名前が空白です';
-                                    }
-                                    return null;
-                                  },
-                                  onChanged: (String value) {
-                                    setState(() {
-                                      name = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox(
-                                  height: context.screenHeight * 0.01,
-                                ),
-                                TextFormField(
-                                  decoration: const InputDecoration(
-                                    icon: Icon(Icons.mail),
-                                    hintText: 'メールアドレスを入力',
-                                    labelText: 'Email Address',
-                                  ),
-                                  validator: (value) {
-                                    if ((value == null) ||
-                                        !EmailValidator.validate(value)) {
-                                      return 'メールアドレスのフォーマットが正しくありません';
-                                    }
-                                    return null;
-                                  },
-                                  onChanged: (String value) {
-                                    setState(() {
-                                      mail = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox(
-                                  height: context.screenHeight * 0.01,
-                                ),
-                                SizedBox(
-                                  height: context.screenHeight * 0.03,
-                                  child: ElevatedButton(
-                                    child: const Text("拠点選択"),
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return selectBase.selectBasePull([],
-                                                () {
-                                              Navigator.pop(context);
-                                            }, ref);
-                                          },
-                                        ),
-                                      );
+                                  TextFormField(
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.abc),
+                                      hintText: '名前を入力',
+                                      labelText: 'name',
+                                    ),
+                                    validator: (value) {
+                                      if ((value == null)) {
+                                        return '名前が空白です';
+                                      }
+                                      return null;
+                                    },
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        name = value;
+                                      });
                                     },
                                   ),
-                                ),
-                                SizedBox(
-                                  height: context.screenHeight * 0.01,
-                                ),
-                                TextFormField(
-                                  controller: passwordController,
-                                  onFieldSubmitted: (_) async {
-                                    //     await submit();
-                                  },
-                                  obscureText: hidePassword,
-                                  decoration: InputDecoration(
-                                    icon: const Icon(Icons.lock),
-                                    hintText: 'パスワードを入力',
-                                    labelText: 'Password',
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        hidePassword
-                                            ? Icons.visibility_off
-                                            : Icons.visibility,
-                                      ),
+                                  SizedBox(
+                                    height: context.screenHeight * 0.01,
+                                  ),
+                                  TextFormField(
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.mail),
+                                      hintText: 'メールアドレスを入力',
+                                      labelText: 'Email Address',
+                                    ),
+                                    validator: (value) {
+                                      if ((value == null) ||
+                                          !EmailValidator.validate(value)) {
+                                        return 'メールアドレスのフォーマットが正しくありません';
+                                      }
+                                      return null;
+                                    },
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        mail = value;
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: context.screenHeight * 0.01,
+                                  ),
+                                  SizedBox(
+                                    height: context.screenHeight * 0.03,
+                                    child: ElevatedButton(
+                                      child: const Text("拠点選択"),
                                       onPressed: () {
-                                        setState(() {
-                                          hidePassword = !hidePassword;
-                                        });
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return selectBase
+                                                  .selectBasePull([], () {
+                                                Navigator.pop(context);
+                                              }, ref);
+                                            },
+                                          ),
+                                        );
                                       },
                                     ),
                                   ),
-                                  onChanged: (String value) {
-                                    setState(() {
-                                      password = value;
-                                    });
-                                  },
-                                  validator: (value) {
-                                    if (!passwordCheck) {
-                                      return 'パスワードが条件に反しています';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: context.screenHeight * 0.01,
-                                ),
-                                FlutterPwValidator(
-                                    strings: JaStrings(),
+                                  SizedBox(
+                                    height: context.screenHeight * 0.01,
+                                  ),
+                                  TextFormField(
                                     controller: passwordController,
-                                    minLength: 8,
-                                    width: 400,
-                                    height: 150,
-                                    onSuccess: () {
-                                      passwordCheck = true;
+                                    onFieldSubmitted: (_) async {
+                                      //     await submit();
                                     },
-                                    onFail: () {
-                                      passwordCheck = false;
-                                    }),
-                                SizedBox(height: context.screenHeight * 0.01),
-                                TextFormField(
-                                  obscureText: hideConfirmPassword,
-                                  decoration: InputDecoration(
-                                    icon: const Icon(Icons.lock),
-                                    hintText: 'パスワードを入力',
-                                    labelText: 'Confirm Password',
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        hideConfirmPassword
-                                            ? Icons.visibility_off
-                                            : Icons.visibility,
+                                    obscureText: hidePassword,
+                                    decoration: InputDecoration(
+                                      icon: const Icon(Icons.lock),
+                                      hintText: 'パスワードを入力',
+                                      labelText: 'Password',
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          hidePassword
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            hidePassword = !hidePassword;
+                                          });
+                                        },
                                       ),
-                                      onPressed: () {
-                                        setState(() {
-                                          hideConfirmPassword =
-                                              !hideConfirmPassword;
-                                        });
-                                      },
                                     ),
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        password = value;
+                                      });
+                                    },
+                                    validator: (value) {
+                                      // if (!passwordCheck) {
+                                      //   return 'パスワードが条件に反しています';
+                                      // }
+                                      return null;
+                                    },
                                   ),
-                                  onChanged: (String value) {
-                                    setState(() {
-                                      confirmPassword = value;
-                                    });
-                                  },
-                                  validator: (value) {
-                                    if (confirmPassword != password) {
-                                      return 'パスワードが一致しません';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(height: context.screenHeight * 0.01),
-                                SizedBox(
-                                  width: context.screenWidth * 0.15,
-                                  height: context.screenHeight * 0.08,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.blueAccent
-                                              .withOpacity(0.8)),
-                                      onPressed: () async {
-                                        await submit(
-                                            Admin(
-                                                uid: "",
-                                                name: name,
-                                                mail: mail,
-                                                base: List.generate(
-                                                    ref
-                                                        .watch(baseListProvider)
-                                                        .where((element) =>
-                                                            element.select)
-                                                        .toList()
-                                                        .length,
-                                                    (index) => ref
-                                                        .watch(baseListProvider)
-                                                        .where((element) =>
-                                                            element.select)
-                                                        .toList()[index]
-                                                        .name),
-                                                superAdmin: false),
-                                            password);
-                                      },
-                                      child: const Text('登録')),
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: context.screenHeight * 0.01,
+                                  ),
+                                  // FlutterPwValidator(
+                                  //     strings: JaStrings(),
+                                  //     controller: passwordController,
+                                  //     minLength: 8,
+                                  //     width: 400,
+                                  //     height: 150,
+                                  //     onSuccess: () {
+                                  //       passwordCheck = true;
+                                  //     },
+                                  //     onFail: () {
+                                  //       passwordCheck = false;
+                                  //     }),
+                                  SizedBox(height: context.screenHeight * 0.01),
+                                  TextFormField(
+                                    obscureText: hideConfirmPassword,
+                                    decoration: InputDecoration(
+                                      icon: const Icon(Icons.lock),
+                                      hintText: 'パスワードを入力',
+                                      labelText: 'Confirm Password',
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          hideConfirmPassword
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            hideConfirmPassword =
+                                                !hideConfirmPassword;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                    onChanged: (String value) {
+                                      setState(() {
+                                        confirmPassword = value;
+                                      });
+                                    },
+                                    validator: (value) {
+                                      if (confirmPassword != password) {
+                                        return 'パスワードが一致しません';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  SizedBox(height: context.screenHeight * 0.01),
+                                  SizedBox(
+                                    width: context.screenWidth * 0.15,
+                                    height: context.screenHeight * 0.08,
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.blueAccent
+                                                .withOpacity(0.8)),
+                                        onPressed: () async {
+                                          await submit(
+                                              Admin(
+                                                  uid: "",
+                                                  name: name,
+                                                  mail: mail,
+                                                  base: List.generate(
+                                                      ref
+                                                          .watch(
+                                                              baseListProvider)
+                                                          .where((element) =>
+                                                              element.select)
+                                                          .toList()
+                                                          .length,
+                                                      (index) => ref
+                                                          .watch(
+                                                              baseListProvider)
+                                                          .where((element) =>
+                                                              element.select)
+                                                          .toList()[index]
+                                                          .name),
+                                                  superAdmin: false),
+                                              password);
+                                        },
+                                        child: const Text('登録')),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
