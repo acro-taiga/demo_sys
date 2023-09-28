@@ -367,7 +367,7 @@ class _SidebarPageState extends ConsumerState<SidebarPage> {
             height: 100,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Image.asset('assets/logo-T-color.jpg'),
+              child: Image.asset('toppage-logo.mp4'),
             ),
           ),
           Expanded(
